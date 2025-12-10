@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Get base directory for SQLite database files
+BASE_DIR = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+
 
 class Config:
     """Base configuration class."""
@@ -13,13 +16,12 @@ class Config:
     # Flask
     SECRET_KEY = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
 
-    # Database
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'postgresql://localhost/digipath_db')
+    # Database - SQLite by default
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        'DATABASE_URL',
+        f'sqlite:///{os.path.join(BASE_DIR, "digipath.db")}'
+    )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,
-        'pool_recycle': 300,
-    }
 
     # JWT
     JWT_SECRET_KEY = os.getenv('JWT_SECRET_KEY', 'jwt-secret-key-change-in-production')
@@ -47,21 +49,13 @@ class ProductionConfig(Config):
     DEBUG = False
     TESTING = False
 
-    # Override with more secure defaults for production
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        'pool_pre_ping': True,
-        'pool_recycle': 300,
-        'pool_size': 10,
-        'max_overflow': 20,
-    }
-
 
 class TestingConfig(Config):
     """Testing configuration."""
 
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/digipath_test_db'
+    SQLALCHEMY_DATABASE_URI = f'sqlite:///{os.path.join(BASE_DIR, "digipath_test.db")}'
     JWT_ACCESS_TOKEN_EXPIRES = timedelta(seconds=60)
 
 
