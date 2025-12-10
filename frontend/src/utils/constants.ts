@@ -1,28 +1,36 @@
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
 export const API_ROUTES = {
-  // Auth
-  LOGIN: '/api/auth/login',
-  LOGOUT: '/api/auth/logout',
-
-  // Sessions
-  SESSIONS: '/api/sessions',
-  SESSION_BY_ID: (id: string) => `/api/sessions/${id}`,
-  UPCOMING_SESSIONS: '/api/sessions/upcoming',
-  PAST_SESSIONS: '/api/sessions/past',
-
-  // Recordings
-  RECORDINGS: '/api/recordings',
-  RECORDING_BY_ID: (id: string) => `/api/recordings/${id}`,
-
-  // Tags
-  TAGS: '/api/tags',
-  TAG_BY_ID: (id: string) => `/api/tags/${id}`,
-  TAGS_BY_CATEGORY: (category: string) => `/api/tags/category/${category}`,
-
-  // Speakers
-  SPEAKERS: '/api/speakers',
-  SPEAKER_BY_ID: (id: string) => `/api/speakers/${id}`,
+  AUTH: {
+    LOGIN: '/api/auth/login',
+    REFRESH: '/api/auth/refresh',
+    LOGOUT: '/api/auth/logout',
+    ME: '/api/auth/me',
+  },
+  PUBLIC: {
+    HOME: '/api/public/home',
+    SESSIONS_UPCOMING: '/api/public/sessions/upcoming',
+    SESSION_DETAIL: (id: string) => `/api/public/sessions/${id}`,
+    SESSION_CALENDAR: (id: string) => `/api/public/sessions/${id}/calendar`,
+    RECORDINGS: '/api/public/recordings',
+    RECORDING_DETAIL: (id: string) => `/api/public/recordings/${id}`,
+    TAGS: '/api/public/tags',
+  },
+  ADMIN: {
+    SESSIONS: '/api/admin/sessions',
+    SESSIONS_PAST: '/api/admin/sessions/past',
+    SESSION_DETAIL: (id: string) => `/api/admin/sessions/${id}`,
+    SESSION_PUBLISH: (id: string) => `/api/admin/sessions/${id}/publish`,
+    SESSION_UNPUBLISH: (id: string) => `/api/admin/sessions/${id}/unpublish`,
+    SESSION_COMPLETE: (id: string) => `/api/admin/sessions/${id}/complete`,
+    RECORDINGS: '/api/admin/recordings',
+    RECORDING_DETAIL: (id: string) => `/api/admin/recordings/${id}`,
+    SPEAKERS: '/api/admin/speakers',
+    SPEAKER_DETAIL: (id: string) => `/api/admin/speakers/${id}`,
+    TAGS: '/api/admin/tags',
+    TAG_DETAIL: (id: string) => `/api/admin/tags/${id}`,
+    TAG_USAGE: (id: string) => `/api/admin/tags/${id}/usage`,
+  },
 };
 
 export const STATUS_LABELS: Record<string, string> = {
