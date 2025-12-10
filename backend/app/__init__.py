@@ -28,11 +28,12 @@ def create_app(config_name=None):
     # Initialize extensions
     initialize_extensions(app)
 
-    # Register blueprints (placeholder for Phase 2)
-    # register_blueprints(app)
+    # Register blueprints
+    register_blueprints(app)
 
     # Register error handlers
-    register_error_handlers(app)
+    from app.utils.errors import register_error_handlers as register_custom_error_handlers
+    register_custom_error_handlers(app)
 
     # Add health check route
     @app.route('/health')
@@ -52,6 +53,12 @@ def initialize_extensions(app):
     # Import models to ensure they are registered with SQLAlchemy
     with app.app_context():
         from app.models import AdminUser, Speaker, Tag, Session, Recording
+
+
+def register_blueprints(app):
+    """Register API blueprints."""
+    from app.api.v1 import register_blueprints as register_v1_blueprints
+    register_v1_blueprints(app)
 
 
 def register_error_handlers(app):
