@@ -13,6 +13,15 @@ import { RecordingDetailPage } from './features/recordings/RecordingDetailPage';
 import { AboutPage } from './features/about/AboutPage';
 import { ContactPage } from './features/contact/ContactPage';
 
+// Admin Pages
+import { LoginPage } from './features/admin/auth/LoginPage';
+import { DashboardPage } from './features/admin/dashboard/DashboardPage';
+import { AdminSessionsPage } from './features/admin/sessions/AdminSessionsPage';
+import { CreateSessionPage } from './features/admin/sessions/CreateSessionPage';
+import { EditSessionPage } from './features/admin/sessions/EditSessionPage';
+import { PastSessionsPage } from './features/admin/sessions/PastSessionsPage';
+import { TagsManagementPage } from './features/admin/tags/TagsManagementPage';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,51 +31,6 @@ const queryClient = new QueryClient({
     },
   },
 });
-
-// Placeholder components for admin pages
-const AdminLoginPage = () => (
-  <PublicLayout>
-    <div className="max-w-md mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Admin Login</h1>
-      <p className="text-gray-600">Placeholder for admin login page.</p>
-    </div>
-  </PublicLayout>
-);
-
-const AdminDashboard = () => (
-  <AdminLayout>
-    <h1 className="text-3xl font-bold text-gray-900 mb-4">Dashboard</h1>
-    <p className="text-gray-600">Placeholder for admin dashboard.</p>
-  </AdminLayout>
-);
-
-const AdminSessions = () => (
-  <AdminLayout>
-    <h1 className="text-3xl font-bold text-gray-900 mb-4">Manage Sessions</h1>
-    <p className="text-gray-600">Placeholder for session management page.</p>
-  </AdminLayout>
-);
-
-const AdminPastSessions = () => (
-  <AdminLayout>
-    <h1 className="text-3xl font-bold text-gray-900 mb-4">Past Sessions</h1>
-    <p className="text-gray-600">Placeholder for past sessions page.</p>
-  </AdminLayout>
-);
-
-const AdminCreateSession = () => (
-  <AdminLayout>
-    <h1 className="text-3xl font-bold text-gray-900 mb-4">Create Session</h1>
-    <p className="text-gray-600">Placeholder for create session page.</p>
-  </AdminLayout>
-);
-
-const AdminTags = () => (
-  <AdminLayout>
-    <h1 className="text-3xl font-bold text-gray-900 mb-4">Manage Tags</h1>
-    <p className="text-gray-600">Placeholder for tag management page.</p>
-  </AdminLayout>
-);
 
 function App() {
   return (
@@ -85,13 +49,18 @@ function App() {
               <Route path="contact" element={<ContactPage />} />
             </Route>
 
+            {/* Admin Auth */}
+            <Route path="/admin/login" element={<LoginPage />} />
+
             {/* Admin Routes */}
-            <Route path="/admin/login" element={<AdminLoginPage />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/sessions" element={<AdminSessions />} />
-            <Route path="/admin/past-sessions" element={<AdminPastSessions />} />
-            <Route path="/admin/create-session" element={<AdminCreateSession />} />
-            <Route path="/admin/tags" element={<AdminTags />} />
+            <Route path="/admin" element={<AdminLayout />}>
+              <Route path="dashboard" element={<DashboardPage />} />
+              <Route path="sessions" element={<AdminSessionsPage />} />
+              <Route path="sessions/create" element={<CreateSessionPage />} />
+              <Route path="sessions/:id/edit" element={<EditSessionPage />} />
+              <Route path="sessions/past" element={<PastSessionsPage />} />
+              <Route path="tags" element={<TagsManagementPage />} />
+            </Route>
           </Routes>
         </Router>
       </AuthProvider>

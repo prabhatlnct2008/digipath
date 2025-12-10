@@ -55,7 +55,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             <option value="">All Organs</option>
             {organTags.map((tag) => (
               <option key={tag.id} value={tag.id}>
-                {tag.name}
+                {tag.label}
               </option>
             ))}
           </select>
@@ -73,7 +73,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             <option value="">All Types</option>
             {typeTags.map((tag) => (
               <option key={tag.id} value={tag.id}>
-                {tag.name}
+                {tag.label}
               </option>
             ))}
           </select>
@@ -91,7 +91,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
             <option value="">All Levels</option>
             {levelTags.map((tag) => (
               <option key={tag.id} value={tag.id}>
-                {tag.name}
+                {tag.label}
               </option>
             ))}
           </select>

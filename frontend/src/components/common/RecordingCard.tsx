@@ -54,9 +54,9 @@ export const RecordingCard: React.FC<RecordingCardProps> = ({ session, onWatch }
       </div>
 
       <div className="flex flex-wrap gap-2 mb-4">
-        <TagChip label={session.organ_tag.name} />
-        <TagChip label={session.type_tag.name} />
-        <TagChip label={session.level_tag.name} />
+        <TagChip label={session.organ_tag.label} />
+        <TagChip label={session.type_tag.label} />
+        <TagChip label={session.level_tag.label} />
       </div>
 
       <div className="mt-auto">

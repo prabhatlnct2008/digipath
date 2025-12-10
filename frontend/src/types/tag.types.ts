@@ -2,20 +2,20 @@ export type TagCategory = 'organ' | 'type' | 'level';
 
 export interface Tag {
   id: string;
-  name: string;
+  label: string;
   category: TagCategory;
-  description?: string;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
 }
 
 export interface TagCreate {
-  name: string;
+  label: string;
   category: TagCategory;
-  description?: string;
+  is_active?: boolean;
 }
 
 export interface TagUpdate {
-  name?: string;
-  description?: string;
+  label?: string;
+  is_active?: boolean;
 }
