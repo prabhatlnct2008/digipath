@@ -358,16 +358,19 @@ def list_upcoming_sessions():
 @jwt_required()
 def list_past_sessions():
     """
-    List past sessions (admin view).
+    List past sessions (admin view) with search and pagination.
 
     Query Parameters:
         status: Filter by status
         organ_tag_id: Filter by organ tag
         type_tag_id: Filter by type tag
         level_tag_id: Filter by level tag
+        search: Search in title, summary, abstract, speaker name, tag labels
+        page: Page number (default: 1)
+        per_page: Items per page (default: 20)
 
     Returns:
-        200: List of past sessions
+        200: Paginated list of past sessions
     """
     # Get filters from query parameters
     filters = {}
@@ -379,9 +382,20 @@ def list_past_sessions():
         filters['type_tag_id'] = request.args.get('type_tag_id')
     if request.args.get('level_tag_id'):
         filters['level_tag_id'] = request.args.get('level_tag_id')
+    if request.args.get('search'):
+        filters['search'] = request.args.get('search')
 
-    # Get sessions
-    sessions = SessionService.list_past_sessions(filters)
+    # Get pagination parameters
+    page = request.args.get('page', 1, type=int)
+    per_page = request.args.get('per_page', 20, type=int)
+
+    pagination = {
+        'page': page,
+        'per_page': per_page
+    }
+
+    # Get sessions with pagination
+    sessions, total = SessionService.list_past_sessions(filters, pagination)
 
     # Serialize with nested relationships
     sessions_data = []
@@ -396,4 +410,10 @@ def list_past_sessions():
         session_dict['has_recording'] = session.recording is not None
         sessions_data.append(session_response_schema.dump(session_dict))
 
-    return jsonify({'sessions': sessions_data}), 200
+    return jsonify({
+        'items': sessions_data,
+        'total': total,
+        'page': page,
+        'per_page': per_page,
+        'total_pages': ceil(total / per_page) if per_page > 0 else 0
+    }), 200

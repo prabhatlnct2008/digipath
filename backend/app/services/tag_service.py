@@ -183,19 +183,20 @@ class TagService:
         }
 
     @staticmethod
-    def delete_tag(tag_id: str) -> bool:
+    def delete_tag(tag_id: str, replace_with_tag_id: str = None) -> bool:
         """
-        Delete a tag (only if not in use).
+        Delete a tag. If in use, optionally replace with another tag first.
 
         Args:
             tag_id: ID of the tag to delete
+            replace_with_tag_id: Optional ID of tag to replace this with
 
         Returns:
             True if deleted successfully
 
         Raises:
             NotFoundError: If tag not found
-            ValidationError: If tag is in use
+            ValidationError: If tag is in use and no replacement provided
         """
         tag = Tag.query.get(tag_id)
         if not tag:
@@ -203,10 +204,40 @@ class TagService:
 
         # Check usage
         usage_info = TagService.get_tag_usage(tag_id)
+
         if usage_info['usage_count'] > 0:
-            raise ValidationError(
-                f"Cannot delete tag. Associated with {usage_info['usage_count']} session(s)"
-            )
+            if not replace_with_tag_id:
+                raise ValidationError(
+                    f"Cannot delete tag. Associated with {usage_info['usage_count']} session(s). "
+                    "Provide a replacement tag or remove associations first."
+                )
+
+            # Validate replacement tag
+            replacement_tag = Tag.query.get(replace_with_tag_id)
+            if not replacement_tag:
+                raise NotFoundError(f"Replacement tag with id {replace_with_tag_id} not found")
+
+            if replacement_tag.category != tag.category:
+                raise ValidationError(
+                    f"Replacement tag must be in the same category ('{tag.category}')"
+                )
+
+            if not replacement_tag.is_active:
+                raise ValidationError("Replacement tag must be active")
+
+            # Replace tag in all sessions
+            if tag.category == 'organ':
+                Session.query.filter(Session.organ_tag_id == tag_id).update(
+                    {Session.organ_tag_id: replace_with_tag_id}
+                )
+            elif tag.category == 'type':
+                Session.query.filter(Session.type_tag_id == tag_id).update(
+                    {Session.type_tag_id: replace_with_tag_id}
+                )
+            elif tag.category == 'level':
+                Session.query.filter(Session.level_tag_id == tag_id).update(
+                    {Session.level_tag_id: replace_with_tag_id}
+                )
 
         db.session.delete(tag)
         db.session.commit()

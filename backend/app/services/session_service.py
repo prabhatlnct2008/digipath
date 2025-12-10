@@ -242,15 +242,19 @@ class SessionService:
         return query.all()
 
     @staticmethod
-    def list_past_sessions(filters: Optional[Dict] = None) -> List[Session]:
+    def list_past_sessions(
+        filters: Optional[Dict] = None,
+        pagination: Optional[Dict] = None
+    ) -> tuple[List[Session], int]:
         """
-        List past sessions (date < today).
+        List past sessions (date < today) with search and pagination.
 
         Args:
-            filters: Optional additional filters
+            filters: Optional additional filters including search
+            pagination: Dictionary with page and per_page
 
         Returns:
-            List of past sessions
+            Tuple of (list of sessions, total count)
         """
         query = Session.query.filter(Session.date < date.today())
 
@@ -265,9 +269,38 @@ class SessionService:
             if 'level_tag_id' in filters:
                 query = query.filter(Session.level_tag_id == filters['level_tag_id'])
 
+            # Apply search filter
+            search = filters.get('search', '').strip()
+            if search:
+                search_pattern = f'%{search}%'
+                query = query.outerjoin(Speaker, Session.speaker_id == Speaker.id)
+                query = query.outerjoin(Tag, or_(
+                    Session.organ_tag_id == Tag.id,
+                    Session.type_tag_id == Tag.id,
+                    Session.level_tag_id == Tag.id
+                ))
+                query = query.filter(or_(
+                    Session.title.ilike(search_pattern),
+                    Session.summary.ilike(search_pattern),
+                    Session.abstract.ilike(search_pattern),
+                    Speaker.name.ilike(search_pattern),
+                    Tag.label.ilike(search_pattern)
+                )).distinct()
+
         # Order by date descending (most recent first)
         query = query.order_by(desc(Session.date), desc(Session.time))
-        return query.all()
+
+        # Get total count before pagination
+        total = query.count()
+
+        # Apply pagination
+        if pagination:
+            page = pagination.get('page', 1)
+            per_page = pagination.get('per_page', 20)
+            query = query.limit(per_page).offset((page - 1) * per_page)
+
+        sessions = query.all()
+        return sessions, total
 
     @staticmethod
     def publish_session(session_id: str) -> Session:

@@ -31,6 +31,7 @@ class Tag(BaseModel):
         data.update({
             'category': self.category,
             'label': self.label,
+            'name': self.label,  # Alias for frontend compatibility
             'is_active': self.is_active,
         })
         return data

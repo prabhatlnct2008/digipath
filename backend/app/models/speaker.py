@@ -21,6 +21,7 @@ class Speaker(BaseModel):
         data.update({
             'name': self.name,
             'designation': self.designation,
+            'title': self.designation,  # Alias for frontend compatibility
             'is_aiims': self.is_aiims,
         })
         return data

@@ -38,10 +38,12 @@ export const tagsApi = {
   },
 
   /**
-   * Delete a tag (admin)
+   * Delete a tag (admin). If in use, provide replaceWith to reassign sessions.
    */
-  delete: async (id: string): Promise<void> => {
-    await apiClient.delete(API_ROUTES.ADMIN.TAG_DETAIL(id));
+  delete: async (id: string, replaceWith?: string): Promise<void> => {
+    await apiClient.delete(API_ROUTES.ADMIN.TAG_DETAIL(id), {
+      params: replaceWith ? { replace_with: replaceWith } : undefined,
+    });
   },
 
   /**

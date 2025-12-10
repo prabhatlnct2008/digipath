@@ -85,16 +85,19 @@ export function useUpdateTag() {
 }
 
 /**
- * Delete a tag
+ * Delete a tag, optionally replacing it with another tag
  */
 export function useDeleteTag() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (id: string) => tagsApi.delete(id),
+    mutationFn: ({ id, replaceWith }: { id: string; replaceWith?: string }) =>
+      tagsApi.delete(id, replaceWith),
     onSuccess: () => {
       // Invalidate all tag queries to refetch
       queryClient.invalidateQueries({ queryKey: queryKeys.tags.all });
+      // Also invalidate sessions since tag assignments may have changed
+      queryClient.invalidateQueries({ queryKey: queryKeys.sessions.all });
     },
     onError: (error) => {
       const message = handleApiError(error);

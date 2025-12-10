@@ -1,5 +1,6 @@
 """Recording schemas for session recordings."""
-from marshmallow import Schema, fields, validate
+from datetime import date
+from marshmallow import Schema, fields, validate, pre_load
 
 
 class RecordingCreateSchema(Schema):
@@ -7,7 +8,18 @@ class RecordingCreateSchema(Schema):
     session_id = fields.Str(required=True)
     youtube_url = fields.Str(required=True, validate=validate.Length(min=1, max=500))
     pdf_url = fields.Str(required=False, allow_none=True, validate=validate.Length(max=500))
-    recorded_date = fields.Date(required=True)
+    recorded_date = fields.Date(required=False, load_default=None)
+
+    @pre_load
+    def process_input(self, data, **kwargs):
+        """Handle field aliases and defaults."""
+        # Accept video_url as alias for youtube_url
+        if 'video_url' in data and 'youtube_url' not in data:
+            data['youtube_url'] = data.pop('video_url')
+        # Default recorded_date to today if not provided
+        if not data.get('recorded_date'):
+            data['recorded_date'] = date.today().isoformat()
+        return data
 
 
 class RecordingUpdateSchema(Schema):

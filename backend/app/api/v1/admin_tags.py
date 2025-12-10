@@ -103,17 +103,21 @@ def update_tag(tag_id):
 @jwt_required()
 def delete_tag(tag_id):
     """
-    Delete a tag (only if not in use).
+    Delete a tag. If in use, optionally replace with another tag first.
 
     Args:
         tag_id: ID of the tag
 
+    Query Parameters:
+        replace_with: ID of tag to replace this with (required if tag is in use)
+
     Returns:
         204: Tag deleted
-        400: Tag is in use
+        400: Tag is in use and no replacement provided
         404: Tag not found
     """
-    TagService.delete_tag(tag_id)
+    replace_with_tag_id = request.args.get('replace_with')
+    TagService.delete_tag(tag_id, replace_with_tag_id)
     return '', 204
 
 
