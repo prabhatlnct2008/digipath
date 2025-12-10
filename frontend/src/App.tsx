@@ -4,6 +4,15 @@ import { AuthProvider } from './context/AuthContext';
 import { PublicLayout } from './components/layout/PublicLayout';
 import { AdminLayout } from './components/layout/AdminLayout';
 
+// Public Pages
+import { HomePage } from './features/home/HomePage';
+import { UpcomingSessionsPage } from './features/sessions/UpcomingSessionsPage';
+import { SessionDetailPage } from './features/sessions/SessionDetailPage';
+import { RecordingsPage } from './features/recordings/RecordingsPage';
+import { RecordingDetailPage } from './features/recordings/RecordingDetailPage';
+import { AboutPage } from './features/about/AboutPage';
+import { ContactPage } from './features/contact/ContactPage';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -14,38 +23,7 @@ const queryClient = new QueryClient({
   },
 });
 
-// Placeholder components
-const HomePage = () => (
-  <PublicLayout>
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">
-        Welcome to AIIMS Telepathology Teaching Initiative
-      </h1>
-      <p className="text-gray-600">
-        This is a placeholder for the home page. Full pages will be implemented in Phase 3.
-      </p>
-    </div>
-  </PublicLayout>
-);
-
-const SessionsPage = () => (
-  <PublicLayout>
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Upcoming Sessions</h1>
-      <p className="text-gray-600">Placeholder for sessions page.</p>
-    </div>
-  </PublicLayout>
-);
-
-const RecordingsPage = () => (
-  <PublicLayout>
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-4">Past Recordings</h1>
-      <p className="text-gray-600">Placeholder for recordings page.</p>
-    </div>
-  </PublicLayout>
-);
-
+// Placeholder components for admin pages
 const AdminLoginPage = () => (
   <PublicLayout>
     <div className="max-w-md mx-auto px-4 py-8">
@@ -97,12 +75,18 @@ function App() {
         <Router>
           <Routes>
             {/* Public Routes */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/sessions" element={<SessionsPage />} />
-            <Route path="/recordings" element={<RecordingsPage />} />
-            <Route path="/admin/login" element={<AdminLoginPage />} />
+            <Route path="/" element={<PublicLayout />}>
+              <Route index element={<HomePage />} />
+              <Route path="sessions" element={<UpcomingSessionsPage />} />
+              <Route path="sessions/:id" element={<SessionDetailPage />} />
+              <Route path="recordings" element={<RecordingsPage />} />
+              <Route path="recordings/:id" element={<RecordingDetailPage />} />
+              <Route path="about" element={<AboutPage />} />
+              <Route path="contact" element={<ContactPage />} />
+            </Route>
 
             {/* Admin Routes */}
+            <Route path="/admin/login" element={<AdminLoginPage />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/sessions" element={<AdminSessions />} />
             <Route path="/admin/past-sessions" element={<AdminPastSessions />} />
