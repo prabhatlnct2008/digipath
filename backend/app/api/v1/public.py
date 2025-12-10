@@ -290,9 +290,10 @@ def get_tags():
 
     # Serialize
     response_data = {
-        'organ': [tag_schema.dump(tag.to_dict()) for tag in tags_grouped['organ']],
-        'type': [tag_schema.dump(tag.to_dict()) for tag in tags_grouped['type']],
-        'level': [tag_schema.dump(tag.to_dict()) for tag in tags_grouped['level']]
+        # Pass model instances so Marshmallow can handle datetime fields
+        'organ': [tag_schema.dump(tag) for tag in tags_grouped['organ']],
+        'type': [tag_schema.dump(tag) for tag in tags_grouped['type']],
+        'level': [tag_schema.dump(tag) for tag in tags_grouped['level']]
     }
 
     return jsonify(response_data), 200
