@@ -30,7 +30,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       formData.append('username', credentials.username);
       formData.append('password', credentials.password);
 
-      const response = await apiClient.post(API_ROUTES.LOGIN, formData, {
+      const response = await apiClient.post(API_ROUTES.AUTH.LOGIN, formData, {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
