@@ -41,14 +41,14 @@ const impactData: ImpactCardData[] = [
 
 export function ImpactCards() {
   return (
-    <section className="bg-surface-gray py-16 lg:py-24">
+    <section className="bg-gray-50 py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-section text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
             Why This Initiative Matters
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Transforming pathology education through technology, expertise, and accessibility
           </p>
         </div>
@@ -58,25 +58,25 @@ export function ImpactCards() {
           {impactData.map((impact, index) => (
             <div
               key={index}
-              className="group bg-white rounded-xl p-6 lg:p-8 shadow-soft border border-border-light
-                hover:-translate-y-1 hover:shadow-card-hover hover:border-primary-200
-                transition-all duration-normal ease-smooth
-                focus-within:ring-2 focus-within:ring-primary-400 focus-within:ring-offset-2"
+              className="group bg-white rounded-xl p-6 lg:p-8 shadow-sm border border-gray-200
+                hover:-translate-y-1 hover:shadow-lg hover:border-blue-200
+                transition-all duration-200
+                focus-within:ring-2 focus-within:ring-blue-400 focus-within:ring-offset-2"
             >
               {/* Icon */}
-              <div className="w-16 h-16 bg-primary-50 rounded-full flex items-center justify-center mb-6
-                text-primary-500 group-hover:scale-105 transition-transform duration-normal">
+              <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-6
+                text-blue-500 group-hover:scale-105 transition-transform duration-200">
                 {impact.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-card-title text-xl font-semibold text-text-primary mb-3
-                group-hover:text-primary-600 transition-colors duration-micro">
+              <h3 className="text-xl font-semibold text-gray-900 mb-3
+                group-hover:text-blue-600 transition-colors duration-150">
                 {impact.title}
               </h3>
 
               {/* Description */}
-              <p className="text-text-secondary leading-relaxed">
+              <p className="text-gray-600 leading-relaxed">
                 {impact.description}
               </p>
             </div>

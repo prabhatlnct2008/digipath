@@ -3,11 +3,11 @@ import { Button } from '../../../components/ui/Button';
 
 export function CTABand() {
   return (
-    <section className="bg-primary-600 text-white py-16 lg:py-20 relative overflow-hidden">
+    <section className="bg-blue-600 text-white py-16 lg:py-20 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-primary-400/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
@@ -17,7 +17,7 @@ export function CTABand() {
         </h2>
 
         {/* Supporting text */}
-        <p className="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
           Join our community of learners and access expert-led teaching sessions from AIIMS faculty
         </p>
 
@@ -28,10 +28,10 @@ export function CTABand() {
               size="lg"
               className="
                 w-full sm:w-auto
-                bg-white text-primary-600
-                hover:bg-gray-100 hover:text-primary-700
+                bg-white text-blue-600
+                hover:bg-gray-100 hover:text-blue-700
                 shadow-lg hover:shadow-xl
-                transition-all duration-normal
+                transition-all duration-200
               "
               rightIcon={
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -58,7 +58,7 @@ export function CTABand() {
         </div>
 
         {/* Additional info */}
-        <p className="mt-8 text-sm text-primary-200">
+        <p className="mt-8 text-sm text-blue-200">
           Free access for all medical professionals and students
         </p>
       </div>

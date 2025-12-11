@@ -14,22 +14,22 @@ interface BadgeProps {
 
 const variantClasses: Record<BadgeVariant, string> = {
   default: 'bg-gray-100 text-gray-700 border-gray-200',
-  success: 'bg-status-success-light text-green-700 border-green-200',
-  warning: 'bg-status-warning-light text-amber-700 border-amber-200',
-  danger: 'bg-status-danger-light text-red-700 border-red-200',
-  info: 'bg-status-info-light text-blue-700 border-blue-200',
-  primary: 'bg-primary-50 text-primary-600 border-primary-200',
-  secondary: 'bg-secondary-50 text-secondary-600 border-secondary-200',
+  success: 'bg-green-50 text-green-700 border-green-200',
+  warning: 'bg-amber-50 text-amber-700 border-amber-200',
+  danger: 'bg-red-50 text-red-700 border-red-200',
+  info: 'bg-blue-50 text-blue-700 border-blue-200',
+  primary: 'bg-blue-50 text-blue-600 border-blue-200',
+  secondary: 'bg-gray-50 text-gray-600 border-gray-200',
 };
 
 const dotColors: Record<BadgeVariant, string> = {
   default: 'bg-gray-500',
-  success: 'bg-status-success',
-  warning: 'bg-status-warning',
-  danger: 'bg-status-danger',
-  info: 'bg-status-info',
-  primary: 'bg-primary-500',
-  secondary: 'bg-secondary-500',
+  success: 'bg-green-500',
+  warning: 'bg-amber-500',
+  danger: 'bg-red-500',
+  info: 'bg-blue-500',
+  primary: 'bg-blue-500',
+  secondary: 'bg-gray-500',
 };
 
 const sizeClasses: Record<BadgeSize, string> = {

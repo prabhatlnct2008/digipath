@@ -25,12 +25,12 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
   );
 
   return (
-    <div className="text-center py-12 animate-fade-in">
-      <div className="w-20 h-20 bg-surface-gray rounded-full flex items-center justify-center mx-auto mb-6 text-text-muted">
+    <div className="text-center py-12">
+      <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-400">
         {icon || defaultIcon}
       </div>
-      <h3 className="text-lg font-semibold text-text-primary mb-2">{title}</h3>
-      <p className="text-text-secondary mb-6 max-w-md mx-auto leading-relaxed">{message}</p>
+      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+      <p className="text-gray-600 mb-6 max-w-md mx-auto leading-relaxed">{message}</p>
       {action}
       {actionLabel && onAction && !action && (
         <Button onClick={onAction} variant="primary">

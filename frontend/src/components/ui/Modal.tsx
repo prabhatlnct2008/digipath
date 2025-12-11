@@ -128,7 +128,7 @@ export const Modal: React.FC<ModalProps> = ({
     >
       {/* Overlay */}
       <div
-        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-normal animate-fade-in"
+        className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200"
         onClick={handleOverlayClick}
       />
 
@@ -143,20 +143,19 @@ export const Modal: React.FC<ModalProps> = ({
           className={`
             relative w-full ${sizeClasses[size]}
             bg-white rounded-xl shadow-xl
-            transform transition-all duration-normal
-            animate-scale-in
+            transform transition-all duration-200
             ${className}
           `.replace(/\s+/g, ' ').trim()}
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
           {(title || showCloseButton) && (
-            <div className="flex items-start justify-between p-5 border-b border-border-light">
+            <div className="flex items-start justify-between p-5 border-b border-gray-200">
               <div>
                 {title && (
                   <h2
                     id="modal-title"
-                    className="text-lg font-semibold text-text-primary"
+                    className="text-lg font-semibold text-gray-900"
                   >
                     {title}
                   </h2>
@@ -164,7 +163,7 @@ export const Modal: React.FC<ModalProps> = ({
                 {description && (
                   <p
                     id="modal-description"
-                    className="mt-1 text-sm text-text-secondary"
+                    className="mt-1 text-sm text-gray-600"
                   >
                     {description}
                   </p>
@@ -175,9 +174,9 @@ export const Modal: React.FC<ModalProps> = ({
                   onClick={onClose}
                   className="
                     p-1 -m-1 rounded-lg
-                    text-text-muted hover:text-text-primary hover:bg-gray-100
-                    transition-colors duration-micro
-                    focus:outline-none focus:ring-2 focus:ring-primary-400
+                    text-gray-400 hover:text-gray-900 hover:bg-gray-100
+                    transition-colors duration-150
+                    focus:outline-none focus:ring-2 focus:ring-blue-400
                   "
                   aria-label="Close modal"
                 >
@@ -196,7 +195,7 @@ export const Modal: React.FC<ModalProps> = ({
 
           {/* Footer */}
           {footer && (
-            <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-border-light bg-gray-50 rounded-b-xl">
+            <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-gray-200 bg-gray-50 rounded-b-xl">
               {footer}
             </div>
           )}
@@ -231,15 +230,15 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   isLoading = false,
 }) => {
   const iconColors = {
-    danger: 'text-status-danger bg-status-danger-light',
-    warning: 'text-status-warning bg-status-warning-light',
-    info: 'text-status-info bg-status-info-light',
+    danger: 'text-red-500 bg-red-50',
+    warning: 'text-amber-500 bg-amber-50',
+    info: 'text-blue-500 bg-blue-50',
   };
 
   const buttonColors = {
-    danger: 'bg-status-danger hover:bg-red-600 focus:ring-red-400',
-    warning: 'bg-status-warning hover:bg-amber-600 focus:ring-amber-400',
-    info: 'bg-status-info hover:bg-blue-600 focus:ring-blue-400',
+    danger: 'bg-red-500 hover:bg-red-600 focus:ring-red-400',
+    warning: 'bg-amber-500 hover:bg-amber-600 focus:ring-amber-400',
+    info: 'bg-blue-500 hover:bg-blue-600 focus:ring-blue-400',
   };
 
   return (
@@ -262,18 +261,18 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
             </svg>
           )}
         </div>
-        <h3 className="text-lg font-semibold text-text-primary mb-2">{title}</h3>
-        <p className="text-text-secondary mb-6">{message}</p>
+        <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+        <p className="text-gray-600 mb-6">{message}</p>
         <div className="flex gap-3 justify-center">
           <button
             onClick={onClose}
             disabled={isLoading}
             className="
               px-4 py-2 rounded-full font-medium
-              bg-white border border-border text-text-primary
-              hover:bg-gray-50 hover:border-border-focus
-              transition-all duration-micro
-              focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2
+              bg-white border border-gray-300 text-gray-900
+              hover:bg-gray-50 hover:border-gray-400
+              transition-all duration-150
+              focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
               disabled:opacity-50 disabled:cursor-not-allowed
             "
           >
@@ -284,7 +283,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
             disabled={isLoading}
             className={`
               px-4 py-2 rounded-full font-medium text-white
-              transition-all duration-micro
+              transition-all duration-150
               focus:outline-none focus:ring-2 focus:ring-offset-2
               disabled:opacity-50 disabled:cursor-not-allowed
               ${buttonColors[variant]}
