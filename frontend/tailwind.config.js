@@ -7,54 +7,62 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Primary: Navy blue palette with proper gradation
         primary: {
-          50: '#e6f0fa',
-          100: '#cce0f5',
-          200: '#99c2eb',
-          300: '#66a3e0',
-          400: '#3385d6',
-          500: '#1e3a5f',
-          600: '#1a324f',
-          700: '#16293f',
-          800: '#12202f',
-          900: '#0e171f',
+          50: '#f0f5fa',
+          100: '#dae5f2',
+          200: '#b8cce6',
+          300: '#8aadd4',
+          400: '#5a8ac0',
+          500: '#3d6ea8',
+          600: '#2c5282',
+          700: '#1e3a5f',
+          800: '#162d4a',
+          900: '#0f1f33',
+          950: '#091525',
         },
+        // Secondary: Brighter blue for accents
         secondary: {
-          50: '#e6f7ff',
-          100: '#bae7ff',
-          200: '#91d5ff',
-          300: '#69c0ff',
-          400: '#40a9ff',
-          500: '#1890ff',
-          600: '#096dd9',
-          700: '#0050b3',
-          800: '#003a8c',
-          900: '#002766',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
+        // Surface colors for backgrounds
         surface: {
           white: '#ffffff',
           gray: '#f8fafc',
           dark: '#1e293b',
         },
+        // Text colors
         text: {
-          primary: '#1a202c',
+          primary: '#1e293b',
           secondary: '#64748b',
           muted: '#94a3b8',
           inverse: '#ffffff',
         },
+        // Border colors
         border: {
           light: '#e2e8f0',
           DEFAULT: '#cbd5e1',
+          dark: '#94a3b8',
           focus: '#3b82f6',
         },
+        // Status colors
         status: {
-          success: '#22c55e',
+          success: '#16a34a',
           'success-light': '#dcfce7',
-          warning: '#f59e0b',
+          warning: '#d97706',
           'warning-light': '#fef3c7',
-          danger: '#ef4444',
+          danger: '#dc2626',
           'danger-light': '#fee2e2',
-          info: '#3b82f6',
+          info: '#2563eb',
           'info-light': '#dbeafe',
         },
       },
@@ -91,6 +99,8 @@ export default {
         'scale-in': 'scaleIn 0.2s ease-out forwards',
         'toast-in': 'toastIn 0.3s ease-out forwards',
         'toast-out': 'toastOut 0.3s ease-in forwards',
+        'slide-in-right': 'slideInRight 0.3s ease-out forwards',
+        'bounce-slow': 'bounceSlow 2s infinite',
       },
       keyframes: {
         shimmer: {
@@ -120,6 +130,14 @@ export default {
         toastOut: {
           '0%': { opacity: '1', transform: 'translateY(0) translateX(-50%)' },
           '100%': { opacity: '0', transform: 'translateY(-100%) translateX(-50%)' },
+        },
+        slideInRight: {
+          '0%': { opacity: '0', transform: 'translateX(20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        bounceSlow: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
       },
       spacing: {
