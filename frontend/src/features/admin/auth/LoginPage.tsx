@@ -20,7 +20,7 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      await login({ username: email, password });
+      await login({ email, password });
       navigate('/admin/dashboard');
     } catch (err) {
       setError('Invalid email or password. Please try again.');
@@ -81,7 +81,7 @@ export const LoginPage: React.FC = () => {
               <div className="pt-2">
                 <Button
                   type="submit"
-                  className="w-full"
+                  className="w-full bg-primary-700 hover:bg-primary-800 text-white shadow-md"
                   disabled={isLoading}
                 >
                   {isLoading ? 'Signing in...' : 'Sign In'}

@@ -26,19 +26,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (credentials: LoginCredentials) => {
     try {
-      const formData = new FormData();
-      formData.append('username', credentials.username);
-      formData.append('password', credentials.password);
-
-      const response = await apiClient.post(API_ROUTES.AUTH.LOGIN, formData, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
+      // Send JSON as expected by backend (email + password)
+      const response = await apiClient.post(API_ROUTES.AUTH.LOGIN, {
+        email: credentials.email,
+        password: credentials.password,
       });
 
-      const { access_token, user: userData } = response.data;
+      const { access_token, refresh_token } = response.data;
 
+      // Persist tokens first
       localStorage.setItem('access_token', access_token);
+      if (refresh_token) {
+        localStorage.setItem('refresh_token', refresh_token);
+      }
+
+      // Fetch user profile to populate context
+      const meResponse = await apiClient.get(API_ROUTES.AUTH.ME);
+      const userData: User = meResponse.data;
+
       localStorage.setItem('user', JSON.stringify(userData));
       setUser(userData);
     } catch (error) {

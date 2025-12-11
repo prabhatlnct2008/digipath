@@ -1,12 +1,13 @@
 export interface User {
   id: string;
-  username: string;
   email: string;
-  created_at: string;
+  name?: string;
+  role?: string;
+  created_at?: string;
 }
 
 export interface LoginCredentials {
-  username: string;
+  email: string;
   password: string;
 }
 

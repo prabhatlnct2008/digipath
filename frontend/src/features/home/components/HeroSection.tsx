@@ -16,8 +16,9 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/sessions">
               <Button
+                variant="secondary"
                 size="lg"
-                className="bg-white text-[#1e3a5f] hover:bg-gray-100 w-full sm:w-auto"
+                className="w-full sm:w-auto shadow-md"
               >
                 View Upcoming Sessions
               </Button>
@@ -26,7 +27,7 @@ export function HeroSection() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white/10 w-full sm:w-auto"
+                className="border-white text-white hover:bg-white/10 w-full sm:w-auto shadow-md"
               >
                 Browse Recordings
               </Button>

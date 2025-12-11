@@ -344,18 +344,25 @@ def get_recording_detail(recording_id):
 @bp.route('/tags', methods=['GET'])
 def get_tags():
     """
-    Get all active tags grouped by category.
+    Get active tags. Supports grouped response or single-category list.
 
     Returns:
-        200: Tags grouped by category (organ, type, level)
+        200: Tags grouped by category (organ, type, level) by default
+        200: Flat list when ?category=<organ|type|level> is provided
     """
-    tags_grouped = TagService.get_tags_grouped()
+    category = request.args.get('category')
 
-    # Serialize - use to_dict() for consistent field names
+    # If category specified, return a flat list (needed by filter panels)
+    if category:
+        tags = TagService.list_tags(category=category, active_only=True)
+        return jsonify([tag_schema.dump(tag) for tag in tags]), 200
+
+    # Default: grouped response
+    tags_grouped = TagService.get_tags_grouped()
     response_data = {
-        'organ': [tag.to_dict() for tag in tags_grouped['organ']],
-        'type': [tag.to_dict() for tag in tags_grouped['type']],
-        'level': [tag.to_dict() for tag in tags_grouped['level']]
+        'organ': [tag_schema.dump(tag) for tag in tags_grouped['organ']],
+        'type': [tag_schema.dump(tag) for tag in tags_grouped['type']],
+        'level': [tag_schema.dump(tag) for tag in tags_grouped['level']]
     }
 
     return jsonify(response_data), 200

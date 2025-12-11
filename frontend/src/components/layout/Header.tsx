@@ -48,7 +48,7 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
                 </Link>
                 <Link
                   to="/admin/login"
-                  className="bg-primary-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-primary-700"
+                  className="px-4 py-2 rounded-md text-sm font-medium border border-primary-600 text-primary-700 bg-white hover:bg-primary-50 shadow-sm"
                 >
                   Admin Login
                 </Link>
