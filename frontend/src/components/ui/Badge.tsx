@@ -1,27 +1,95 @@
 import React from 'react';
 
-type BadgeColor = 'yellow' | 'green' | 'blue' | 'gray' | 'red';
+type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'info' | 'primary' | 'secondary';
+type BadgeSize = 'sm' | 'md' | 'lg';
 
 interface BadgeProps {
   children: React.ReactNode;
-  color?: BadgeColor;
+  variant?: BadgeVariant;
+  size?: BadgeSize;
+  dot?: boolean;
+  icon?: React.ReactNode;
   className?: string;
 }
 
-const colorClasses: Record<BadgeColor, string> = {
-  yellow: 'bg-yellow-100 text-yellow-800 border-yellow-200',
-  green: 'bg-green-100 text-green-800 border-green-200',
-  blue: 'bg-blue-100 text-blue-800 border-blue-200',
-  gray: 'bg-gray-100 text-gray-800 border-gray-200',
-  red: 'bg-red-100 text-red-800 border-red-200',
+const variantClasses: Record<BadgeVariant, string> = {
+  default: 'bg-gray-100 text-gray-700 border-gray-200',
+  success: 'bg-status-success-light text-green-700 border-green-200',
+  warning: 'bg-status-warning-light text-amber-700 border-amber-200',
+  danger: 'bg-status-danger-light text-red-700 border-red-200',
+  info: 'bg-status-info-light text-blue-700 border-blue-200',
+  primary: 'bg-primary-50 text-primary-600 border-primary-200',
+  secondary: 'bg-secondary-50 text-secondary-600 border-secondary-200',
+};
+
+const dotColors: Record<BadgeVariant, string> = {
+  default: 'bg-gray-500',
+  success: 'bg-status-success',
+  warning: 'bg-status-warning',
+  danger: 'bg-status-danger',
+  info: 'bg-status-info',
+  primary: 'bg-primary-500',
+  secondary: 'bg-secondary-500',
+};
+
+const sizeClasses: Record<BadgeSize, string> = {
+  sm: 'px-1.5 py-0.5 text-xs',
+  md: 'px-2.5 py-0.5 text-xs',
+  lg: 'px-3 py-1 text-sm',
 };
 
 export const Badge: React.FC<BadgeProps> = ({
   children,
-  color = 'gray',
+  variant = 'default',
+  size = 'md',
+  dot = false,
+  icon,
   className = '',
 }) => {
-  const classes = `inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${colorClasses[color]} ${className}`;
+  const classes = `
+    inline-flex items-center gap-1.5 rounded-full font-medium border
+    ${variantClasses[variant]}
+    ${sizeClasses[size]}
+    ${className}
+  `.replace(/\s+/g, ' ').trim();
 
-  return <span className={classes}>{children}</span>;
+  return (
+    <span className={classes}>
+      {dot && (
+        <span className={`w-1.5 h-1.5 rounded-full ${dotColors[variant]}`} />
+      )}
+      {icon && (
+        <span className="flex-shrink-0">{icon}</span>
+      )}
+      {children}
+    </span>
+  );
+};
+
+// Status badge - commonly used for session/recording status
+type StatusType = 'published' | 'draft' | 'completed' | 'live' | 'upcoming' | 'recording_added' | 'recording_missing';
+
+interface StatusBadgeProps {
+  status: StatusType;
+  className?: string;
+}
+
+const statusConfig: Record<StatusType, { label: string; variant: BadgeVariant; dot?: boolean }> = {
+  published: { label: 'Published', variant: 'primary', dot: true },
+  draft: { label: 'Draft', variant: 'default', dot: true },
+  completed: { label: 'Completed', variant: 'success', dot: true },
+  live: { label: 'Live Now', variant: 'danger', dot: true },
+  upcoming: { label: 'Upcoming', variant: 'info', dot: true },
+  recording_added: { label: 'Recording Added', variant: 'success', dot: true },
+  recording_missing: { label: 'Recording Not Added', variant: 'danger', dot: true },
+};
+
+export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className = '' }) => {
+  const config = statusConfig[status];
+
+  return (
+    <Badge variant={config.variant} dot={config.dot} className={className}>
+      {config.label}
+    </Badge>
+  );
 };
