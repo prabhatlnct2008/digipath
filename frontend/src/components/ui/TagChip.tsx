@@ -16,16 +16,16 @@ interface TagChipProps {
 
 const variantClasses: Record<TagChipVariant, string> = {
   default: `
-    bg-gray-100 text-text-secondary border border-transparent
-    hover:bg-gray-200 hover:text-text-primary
+    bg-gray-100 text-gray-600 border border-transparent
+    hover:bg-gray-200 hover:text-gray-900
   `,
   selected: `
-    bg-primary-50 text-primary-600 border border-primary-200
-    hover:bg-primary-100 hover:border-primary-300
+    bg-blue-50 text-blue-600 border border-blue-200
+    hover:bg-blue-100 hover:border-blue-300
   `,
   outline: `
-    bg-transparent text-text-secondary border border-border
-    hover:bg-gray-50 hover:border-border-focus hover:text-text-primary
+    bg-transparent text-gray-600 border border-gray-300
+    hover:bg-gray-50 hover:border-gray-400 hover:text-gray-900
   `,
 };
 
@@ -56,8 +56,8 @@ export const TagChip: React.FC<TagChipProps> = ({
 
   const baseClasses = `
     inline-flex items-center rounded-full font-medium
-    transition-all duration-micro ease-smooth
-    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-1
+    transition-all duration-150
+    focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1
   `;
 
   const interactiveClasses = onClick && !disabled
@@ -105,7 +105,7 @@ export const TagChip: React.FC<TagChipProps> = ({
           className={`
             inline-flex items-center justify-center rounded-full
             text-current opacity-60 hover:opacity-100
-            hover:bg-black/10 transition-all duration-micro
+            hover:bg-black/10 transition-all duration-150
             focus:outline-none focus:ring-1 focus:ring-current
             ${removeBtnSizeClasses[size]}
           `.replace(/\s+/g, ' ').trim()}
@@ -143,13 +143,13 @@ export const FilterChip: React.FC<FilterChipProps> = ({
 }) => {
   const baseClasses = `
     inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium
-    transition-all duration-micro ease-smooth
-    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-1
+    transition-all duration-150
+    focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-1
   `;
 
   const stateClasses = selected
-    ? 'bg-primary-50 text-primary-600 border border-primary-200 hover:bg-primary-100'
-    : 'bg-gray-100 text-text-secondary border border-transparent hover:bg-gray-200 hover:text-text-primary';
+    ? 'bg-blue-50 text-blue-600 border border-blue-200 hover:bg-blue-100'
+    : 'bg-gray-100 text-gray-600 border border-transparent hover:bg-gray-200 hover:text-gray-900';
 
   const interactiveClasses = disabled
     ? 'opacity-50 cursor-not-allowed'
@@ -171,7 +171,7 @@ export const FilterChip: React.FC<FilterChipProps> = ({
       {count !== undefined && (
         <span className={`
           px-1.5 py-0.5 text-xs rounded-full
-          ${selected ? 'bg-primary-200 text-primary-700' : 'bg-gray-200 text-gray-600'}
+          ${selected ? 'bg-blue-200 text-blue-700' : 'bg-gray-200 text-gray-600'}
         `.replace(/\s+/g, ' ').trim()}>
           {count}
         </span>

@@ -101,7 +101,7 @@ export const CardSkeleton: React.FC<CardSkeletonProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`bg-white rounded-xl border border-border-light p-5 ${className}`}>
+    <div className={`bg-white rounded-xl border border-gray-200 p-5 ${className}`}>
       {showImage && (
         <Skeleton variant="rounded" height="160px" className="mb-4" />
       )}

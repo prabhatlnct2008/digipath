@@ -40,16 +40,16 @@ const paddingClasses: Record<CardPadding, string> = {
 };
 
 const variantClasses: Record<CardVariant, string> = {
-  default: 'bg-white border border-border-light shadow-card',
-  elevated: 'bg-white shadow-card-hover',
-  outlined: 'bg-white border-2 border-border',
+  default: 'bg-white border border-gray-200 shadow',
+  elevated: 'bg-white shadow-lg',
+  outlined: 'bg-white border-2 border-gray-300',
   ghost: 'bg-transparent',
 };
 
 const hoverClasses = `
-  hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary-200
-  active:translate-y-0 active:shadow-card
-  focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2
+  hover:-translate-y-0.5 hover:shadow-lg hover:border-blue-200
+  active:translate-y-0 active:shadow
+  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
 `;
 
 export const Card: React.FC<CardProps> = ({
@@ -62,7 +62,7 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   const baseClasses = `
     rounded-xl
-    transition-all duration-normal ease-smooth
+    transition-all duration-200 ease-out
     ${variantClasses[variant]}
     ${paddingClasses[padding]}
     ${hover ? hoverClasses : ''}
@@ -123,14 +123,14 @@ export const CardTitle: React.FC<{ children: React.ReactNode; className?: string
   children,
   className = '',
 }) => (
-  <h3 className={`text-card-title font-semibold text-text-primary ${className}`}>{children}</h3>
+  <h3 className={`text-xl font-semibold text-gray-900 ${className}`}>{children}</h3>
 );
 
 export const CardDescription: React.FC<{ children: React.ReactNode; className?: string }> = ({
   children,
   className = '',
 }) => (
-  <p className={`text-sm text-text-secondary mt-1 ${className}`}>{children}</p>
+  <p className={`text-sm text-gray-600 mt-1 ${className}`}>{children}</p>
 );
 
 export const CardContent: React.FC<{ children: React.ReactNode; className?: string }> = ({
@@ -144,5 +144,5 @@ export const CardFooter: React.FC<{ children: React.ReactNode; className?: strin
   children,
   className = '',
 }) => (
-  <div className={`mt-4 pt-4 border-t border-border-light ${className}`}>{children}</div>
+  <div className={`mt-4 pt-4 border-t border-gray-200 ${className}`}>{children}</div>
 );

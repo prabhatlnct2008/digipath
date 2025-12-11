@@ -28,9 +28,9 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onViewDetails
   return (
     <article
       className="
-        group bg-white rounded-xl border border-border-light shadow-soft
-        hover:-translate-y-0.5 hover:shadow-card-hover hover:border-primary-200
-        transition-all duration-normal ease-smooth
+        group bg-white rounded-xl border border-gray-200 shadow-sm
+        hover:-translate-y-0.5 hover:shadow-lg hover:border-blue-200
+        transition-all duration-200
         h-full flex flex-col overflow-hidden
       "
     >
@@ -46,38 +46,38 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onViewDetails
         </div>
 
         {/* Title */}
-        <h3 className="text-card-title text-lg font-semibold text-text-primary mb-2 line-clamp-2 group-hover:text-primary-600 transition-colors duration-micro">
+        <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors duration-150">
           {session.title}
         </h3>
 
         {/* Summary */}
-        <p className="text-sm text-text-secondary mb-4 line-clamp-2 leading-relaxed">
+        <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
           {session.summary}
         </p>
 
         {/* Meta Information */}
         <div className="space-y-2 mb-4 text-sm">
           {/* Speaker */}
-          <div className="flex items-center gap-2 text-text-secondary">
-            <svg className="w-4 h-4 flex-shrink-0 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="flex items-center gap-2 text-gray-600">
+            <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            <span className="font-medium text-text-primary">{session.speaker.name}</span>
+            <span className="font-medium text-gray-900">{session.speaker.name}</span>
             {session.speaker.title && (
-              <span className="text-text-muted">• {session.speaker.title}</span>
+              <span className="text-gray-400">• {session.speaker.title}</span>
             )}
           </div>
 
           {/* Date & Time */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 text-text-secondary">
-              <svg className="w-4 h-4 flex-shrink-0 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex items-center gap-2 text-gray-600">
+              <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
               <span>{formatDate(session.date)}</span>
             </div>
-            <div className="flex items-center gap-2 text-text-secondary">
-              <svg className="w-4 h-4 flex-shrink-0 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex items-center gap-2 text-gray-600">
+              <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>{formatTime(session.time)}</span>
@@ -85,8 +85,8 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onViewDetails
           </div>
 
           {/* Duration */}
-          <div className="flex items-center gap-2 text-text-secondary">
-            <svg className="w-4 h-4 flex-shrink-0 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <div className="flex items-center gap-2 text-gray-600">
+            <svg className="w-4 h-4 flex-shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <span>{formatDuration(session.duration_minutes)}</span>
@@ -94,7 +94,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onViewDetails
         </div>
 
         {/* Action Button */}
-        <div className="mt-auto pt-4 border-t border-border-light">
+        <div className="mt-auto pt-4 border-t border-gray-200">
           {onViewDetails ? (
             <Button
               onClick={onViewDetails}

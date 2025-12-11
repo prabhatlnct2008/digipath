@@ -44,7 +44,7 @@ export function UpcomingSessionsPage() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-surface-gray">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <EmptyState
           title="Unable to load sessions"
           message="There was an error loading the sessions. Please try again later."
@@ -54,15 +54,15 @@ export function UpcomingSessionsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-gray">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-500 via-primary-600 to-primary-800 text-white py-12 lg:py-16">
+      <section className="bg-gradient-to-br from-blue-500 via-blue-600 to-blue-800 text-white py-12 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="animate-fade-in">
+          <div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
               Upcoming Sessions
             </h1>
-            <p className="text-xl text-primary-100 max-w-2xl">
+            <p className="text-xl text-blue-100 max-w-2xl">
               Join our expert-led live sessions and expand your pathology knowledge
             </p>
           </div>
@@ -73,13 +73,13 @@ export function UpcomingSessionsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* Sidebar Filters - Desktop */}
           <aside className="hidden lg:block lg:col-span-1">
-            <div className="sticky top-24 bg-white rounded-xl shadow-soft border border-border-light p-5">
+            <div className="sticky top-24 bg-white rounded-xl shadow-sm border border-gray-200 p-5">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-text-primary">Filters</h2>
+                <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
                 {hasActiveFilters && (
                   <button
                     onClick={handleClearFilters}
-                    className="text-sm text-primary-600 hover:text-primary-700 font-medium transition-colors duration-micro"
+                    className="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors duration-150"
                   >
                     Clear all
                   </button>
@@ -126,13 +126,13 @@ export function UpcomingSessionsPage() {
 
             {/* Mobile Filters */}
             {showMobileFilters && (
-              <div className="lg:hidden bg-white rounded-xl shadow-soft border border-border-light p-5 mb-6 animate-slide-down">
+              <div className="lg:hidden bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6">
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-lg font-semibold text-text-primary">Filters</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
                   {hasActiveFilters && (
                     <button
                       onClick={handleClearFilters}
-                      className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+                      className="text-sm text-blue-600 hover:text-blue-700 font-medium"
                     >
                       Clear all
                     </button>
@@ -164,8 +164,8 @@ export function UpcomingSessionsPage() {
               <>
                 {/* Results count */}
                 <div className="mb-6 flex items-center justify-between">
-                  <p className="text-text-secondary">
-                    Showing <span className="font-medium text-text-primary">{sessions.items.length}</span> session{sessions.items.length !== 1 ? 's' : ''}
+                  <p className="text-gray-600">
+                    Showing <span className="font-medium text-gray-900">{sessions.items.length}</span> session{sessions.items.length !== 1 ? 's' : ''}
                   </p>
                 </div>
 
@@ -174,8 +174,6 @@ export function UpcomingSessionsPage() {
                   {sessions.items.map((session, index) => (
                     <div
                       key={session.id}
-                      className="animate-fade-in"
-                      style={{ animationDelay: `${index * 50}ms` }}
                     >
                       <SessionCard
                         session={session}
@@ -186,7 +184,7 @@ export function UpcomingSessionsPage() {
                 </div>
               </>
             ) : (
-              <div className="bg-white rounded-xl shadow-soft border border-border-light p-8">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
                 <EmptyState
                   title="No sessions found"
                   message="Try adjusting your filters or check back later for new sessions."

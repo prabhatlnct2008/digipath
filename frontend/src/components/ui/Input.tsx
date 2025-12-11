@@ -42,15 +42,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
   const baseInputClasses = `
     w-full rounded-lg
     bg-white border
-    transition-all duration-normal ease-smooth
-    placeholder:text-text-muted
-    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400
-    disabled:bg-gray-100 disabled:text-text-muted disabled:cursor-not-allowed
+    transition-all duration-200 ease-out
+    placeholder:text-gray-400
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+    disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed
   `;
 
   const errorClasses = error
-    ? 'border-status-danger focus:ring-status-danger focus:border-status-danger'
-    : 'border-border hover:border-border-focus';
+    ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+    : 'border-gray-300 hover:border-gray-400';
 
   const paddingClasses = leftIcon
     ? 'pl-10'
@@ -63,15 +63,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
       {label && (
         <label
           htmlFor={inputId}
-          className="block text-sm font-medium text-text-primary mb-1.5"
+          className="block text-sm font-medium text-gray-900 mb-1.5"
         >
           {label}
-          {required && <span className="text-status-danger ml-0.5">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
       <div className="relative">
         {leftIcon && (
-          <div className={`absolute left-3 top-1/2 -translate-y-1/2 text-text-muted ${iconSizeClasses[inputSize]}`}>
+          <div className={`absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 ${iconSizeClasses[inputSize]}`}>
             {leftIcon}
           </div>
         )}
@@ -89,13 +89,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
           {...props}
         />
         {rightIcon && (
-          <div className={`absolute right-3 top-1/2 -translate-y-1/2 text-text-muted ${iconSizeClasses[inputSize]}`}>
+          <div className={`absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 ${iconSizeClasses[inputSize]}`}>
             {rightIcon}
           </div>
         )}
       </div>
       {error && (
-        <p className="mt-1.5 text-sm text-status-danger flex items-center gap-1">
+        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
           <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
           </svg>
@@ -103,7 +103,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({
         </p>
       )}
       {helperText && !error && (
-        <p className="mt-1.5 text-sm text-text-secondary">{helperText}</p>
+        <p className="mt-1.5 text-sm text-gray-600">{helperText}</p>
       )}
     </div>
   );
@@ -135,26 +135,26 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
   const baseClasses = `
     w-full px-4 py-2.5 rounded-lg
     bg-white border
-    transition-all duration-normal ease-smooth
-    placeholder:text-text-muted
-    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400
-    disabled:bg-gray-100 disabled:text-text-muted disabled:cursor-not-allowed
+    transition-all duration-200 ease-out
+    placeholder:text-gray-400
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+    disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed
     resize-y
   `;
 
   const errorClasses = error
-    ? 'border-status-danger focus:ring-status-danger focus:border-status-danger'
-    : 'border-border hover:border-border-focus';
+    ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+    : 'border-gray-300 hover:border-gray-400';
 
   return (
     <div className="w-full">
       {label && (
         <label
           htmlFor={textareaId}
-          className="block text-sm font-medium text-text-primary mb-1.5"
+          className="block text-sm font-medium text-gray-900 mb-1.5"
         >
           {label}
-          {required && <span className="text-status-danger ml-0.5">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
       <textarea
@@ -170,7 +170,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
         {...props}
       />
       {error && (
-        <p className="mt-1.5 text-sm text-status-danger flex items-center gap-1">
+        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
           <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
           </svg>
@@ -178,7 +178,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
         </p>
       )}
       {helperText && !error && (
-        <p className="mt-1.5 text-sm text-text-secondary">{helperText}</p>
+        <p className="mt-1.5 text-sm text-gray-600">{helperText}</p>
       )}
     </div>
   );
@@ -213,25 +213,25 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
   const baseClasses = `
     w-full px-4 py-2.5 rounded-lg
     bg-white border
-    transition-all duration-normal ease-smooth
-    focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400
-    disabled:bg-gray-100 disabled:text-text-muted disabled:cursor-not-allowed
+    transition-all duration-200 ease-out
+    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+    disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed
     appearance-none cursor-pointer
   `;
 
   const errorClasses = error
-    ? 'border-status-danger focus:ring-status-danger focus:border-status-danger'
-    : 'border-border hover:border-border-focus';
+    ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+    : 'border-gray-300 hover:border-gray-400';
 
   return (
     <div className="w-full">
       {label && (
         <label
           htmlFor={selectId}
-          className="block text-sm font-medium text-text-primary mb-1.5"
+          className="block text-sm font-medium text-gray-900 mb-1.5"
         >
           {label}
-          {required && <span className="text-status-danger ml-0.5">*</span>}
+          {required && <span className="text-red-500 ml-0.5">*</span>}
         </label>
       )}
       <div className="relative">
@@ -257,14 +257,14 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
             </option>
           ))}
         </select>
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted">
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400">
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </div>
       {error && (
-        <p className="mt-1.5 text-sm text-status-danger flex items-center gap-1">
+        <p className="mt-1.5 text-sm text-red-600 flex items-center gap-1">
           <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
           </svg>
@@ -272,7 +272,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(({
         </p>
       )}
       {helperText && !error && (
-        <p className="mt-1.5 text-sm text-text-secondary">{helperText}</p>
+        <p className="mt-1.5 text-sm text-gray-600">{helperText}</p>
       )}
     </div>
   );

@@ -14,38 +14,38 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary: `
-    bg-primary-500 text-white shadow-button
-    hover:bg-primary-600 hover:shadow-button-hover hover:-translate-y-0.5
-    active:translate-y-0 active:shadow-button
-    focus:ring-primary-400
+    bg-blue-600 text-white shadow-sm
+    hover:bg-blue-700 hover:shadow-md hover:-translate-y-0.5
+    active:translate-y-0 active:shadow-sm
+    focus:ring-blue-500
     disabled:bg-gray-400 disabled:shadow-none disabled:hover:translate-y-0
   `,
   secondary: `
-    bg-white text-primary-500 border border-primary-200 shadow-soft
-    hover:bg-primary-50 hover:border-primary-300 hover:-translate-y-0.5 hover:shadow-card
-    active:translate-y-0 active:shadow-soft
-    focus:ring-primary-400
+    bg-white text-blue-600 border border-blue-200 shadow-sm
+    hover:bg-blue-50 hover:border-blue-300 hover:-translate-y-0.5 hover:shadow-md
+    active:translate-y-0 active:shadow-sm
+    focus:ring-blue-500
     disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-200 disabled:shadow-none disabled:hover:translate-y-0
   `,
   outline: `
-    bg-transparent text-primary-500 border-2 border-primary-500
-    hover:bg-primary-50 hover:-translate-y-0.5
+    bg-transparent text-blue-600 border-2 border-blue-600
+    hover:bg-blue-50 hover:-translate-y-0.5
     active:translate-y-0
-    focus:ring-primary-400
+    focus:ring-blue-500
     disabled:text-gray-400 disabled:border-gray-300 disabled:hover:translate-y-0 disabled:hover:bg-transparent
   `,
   ghost: `
-    bg-transparent text-primary-500
-    hover:bg-primary-50 hover:text-primary-600
-    active:bg-primary-100
-    focus:ring-primary-400
+    bg-transparent text-blue-600
+    hover:bg-blue-50 hover:text-blue-700
+    active:bg-blue-100
+    focus:ring-blue-500
     disabled:text-gray-400 disabled:hover:bg-transparent
   `,
   danger: `
-    bg-status-danger text-white shadow-button
-    hover:bg-red-600 hover:shadow-button-hover hover:-translate-y-0.5
-    active:translate-y-0 active:shadow-button
-    focus:ring-red-400
+    bg-red-600 text-white shadow-sm
+    hover:bg-red-700 hover:shadow-md hover:-translate-y-0.5
+    active:translate-y-0 active:shadow-sm
+    focus:ring-red-500
     disabled:bg-gray-400 disabled:shadow-none disabled:hover:translate-y-0
   `,
 };
@@ -101,7 +101,7 @@ export const Button: React.FC<ButtonProps> = ({
   const baseClasses = `
     inline-flex items-center justify-center
     font-medium rounded-full
-    transition-all duration-normal ease-smooth
+    transition-all duration-200 ease-out
     focus:outline-none focus:ring-2 focus:ring-offset-2
     disabled:cursor-not-allowed
   `;

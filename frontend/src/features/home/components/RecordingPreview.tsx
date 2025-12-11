@@ -14,15 +14,15 @@ export function RecordingPreview({ recordings, isLoading }: RecordingPreviewProp
 
   if (isLoading) {
     return (
-      <section className="py-16 lg:py-24 bg-surface-gray">
+      <section className="py-16 lg:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
             <div>
-              <h2 className="text-section text-3xl lg:text-4xl font-bold text-text-primary mb-2">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
                 Recently Added Recordings
               </h2>
-              <p className="text-lg text-text-secondary">
+              <p className="text-lg text-gray-600">
                 Catch up on past sessions anytime
               </p>
             </div>
@@ -44,15 +44,15 @@ export function RecordingPreview({ recordings, isLoading }: RecordingPreviewProp
   }
 
   return (
-    <section className="py-16 lg:py-24 bg-surface-gray">
+    <section className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with View All link */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <div>
-            <h2 className="text-section text-3xl lg:text-4xl font-bold text-text-primary mb-2">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
               Recently Added Recordings
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-gray-600">
               Catch up on past sessions anytime
             </p>
           </div>
@@ -60,11 +60,11 @@ export function RecordingPreview({ recordings, isLoading }: RecordingPreviewProp
           {/* View All link with arrow animation */}
           <Link
             to="/recordings"
-            className="group inline-flex items-center gap-2 text-primary-600 font-medium hover:text-primary-700 transition-colors duration-micro"
+            className="group inline-flex items-center gap-2 text-blue-600 font-medium hover:text-blue-700 transition-colors duration-150"
           >
             <span>View Recording Library</span>
             <svg
-              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-normal"
+              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-200"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -79,8 +79,6 @@ export function RecordingPreview({ recordings, isLoading }: RecordingPreviewProp
           {recordings.slice(0, 4).map((recording, index) => (
             <div
               key={recording.id}
-              className="animate-fade-in"
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               <RecordingCard
                 session={recording}

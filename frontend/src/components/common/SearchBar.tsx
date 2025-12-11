@@ -27,16 +27,16 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   return (
     <form onSubmit={handleSubmit} className={`relative ${className}`}>
       <div className={`
-        relative rounded-xl border bg-white shadow-soft
-        transition-all duration-normal
+        relative rounded-xl border bg-white shadow-sm
+        transition-all duration-200
         ${isFocused
-          ? 'border-primary-400 ring-2 ring-primary-100 shadow-card'
-          : 'border-border-light hover:border-border-dark'
+          ? 'border-blue-500 ring-2 ring-blue-100 shadow-md'
+          : 'border-gray-200 hover:border-gray-300'
         }
       `}>
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <svg
-            className={`h-5 w-5 transition-colors duration-micro ${isFocused ? 'text-primary-500' : 'text-text-muted'}`}
+            className={`h-5 w-5 transition-colors duration-200 ${isFocused ? 'text-blue-500' : 'text-gray-400'}`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -59,7 +59,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           className="
             block w-full pl-11 pr-10 py-3
             bg-transparent border-0 rounded-xl
-            text-text-primary placeholder:text-text-muted
+            text-gray-900 placeholder:text-gray-400
             focus:outline-none focus:ring-0
           "
         />
@@ -67,7 +67,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <button
             type="button"
             onClick={handleClear}
-            className="absolute inset-y-0 right-0 pr-4 flex items-center text-text-muted hover:text-text-secondary transition-colors duration-micro"
+            className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors duration-200"
           >
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

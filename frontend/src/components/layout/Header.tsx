@@ -45,9 +45,9 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
       <header
         className={`
           fixed top-0 left-0 right-0 z-40
-          bg-white border-b border-border-light
-          transition-shadow duration-normal
-          ${isScrolled ? 'shadow-header' : ''}
+          bg-white border-b border-gray-200
+          transition-shadow duration-200
+          ${isScrolled ? 'shadow-md' : ''}
         `.replace(/\s+/g, ' ').trim()}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -55,12 +55,12 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
             {/* Logo */}
             <Link to="/" className="flex items-center group">
               <div className="flex-shrink-0">
-                <div className="h-10 w-10 bg-primary-500 rounded-lg flex items-center justify-center shadow-soft group-hover:shadow-card transition-shadow duration-normal">
+                <div className="h-10 w-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow duration-200">
                   <span className="text-white font-bold text-xl">A</span>
                 </div>
               </div>
               <div className="ml-3 hidden sm:block">
-                <h1 className="text-lg font-semibold text-text-primary group-hover:text-primary-600 transition-colors duration-micro">
+                <h1 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-150">
                   AIIMS Telepathology
                 </h1>
               </div>
@@ -75,10 +75,10 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
                     to={item.path}
                     className={`
                       relative px-3 py-2 text-sm font-medium
-                      transition-colors duration-micro
+                      transition-colors duration-150
                       ${isActivePath(item.path)
-                        ? 'text-primary-600'
-                        : 'text-text-secondary hover:text-primary-600'
+                        ? 'text-blue-600'
+                        : 'text-gray-600 hover:text-blue-600'
                       }
                     `.replace(/\s+/g, ' ').trim()}
                   >
@@ -86,8 +86,8 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
                     {/* Animated underline */}
                     <span
                       className={`
-                        absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-primary-500 rounded-full
-                        transition-all duration-normal
+                        absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-blue-500 rounded-full
+                        transition-all duration-200
                         ${isActivePath(item.path) ? 'w-4/5' : 'w-0 group-hover:w-4/5'}
                       `.replace(/\s+/g, ' ').trim()}
                     />

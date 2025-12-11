@@ -39,7 +39,7 @@ export const RecordingFilters: React.FC<RecordingFiltersProps> = ({
         {hasActiveFilters && (
           <button
             onClick={onClearFilters}
-            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+            className="text-sm text-blue-600 hover:text-blue-700 font-medium"
           >
             Clear All
           </button>
@@ -58,7 +58,7 @@ export const RecordingFilters: React.FC<RecordingFiltersProps> = ({
                 sort_by: (e.target.value as 'newest' | 'oldest' | 'most_viewed') || undefined,
               })
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Default</option>
             <option value="newest">Newest First</option>
@@ -74,7 +74,7 @@ export const RecordingFilters: React.FC<RecordingFiltersProps> = ({
           <select
             value={selectedOrgan || ''}
             onChange={(e) => onFilterChange({ organ_tag_id: e.target.value || undefined })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Organs</option>
             {organTags.map((tag) => (
@@ -92,7 +92,7 @@ export const RecordingFilters: React.FC<RecordingFiltersProps> = ({
           <select
             value={selectedType || ''}
             onChange={(e) => onFilterChange({ type_tag_id: e.target.value || undefined })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Types</option>
             {typeTags.map((tag) => (
@@ -110,7 +110,7 @@ export const RecordingFilters: React.FC<RecordingFiltersProps> = ({
           <select
             value={selectedLevel || ''}
             onChange={(e) => onFilterChange({ level_tag_id: e.target.value || undefined })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Levels</option>
             {levelTags.map((tag) => (
@@ -128,7 +128,7 @@ export const RecordingFilters: React.FC<RecordingFiltersProps> = ({
             onChange={(e) =>
               onFilterChange({ year: e.target.value ? parseInt(e.target.value) : undefined })
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">All Years</option>
             {years.map((year) => (
