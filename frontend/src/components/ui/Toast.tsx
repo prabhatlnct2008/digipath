@@ -1,5 +1,6 @@
 import React from 'react';
-import { useToastContext, Toast as ToastType, ToastVariant } from '../../context/ToastContext';
+import { useToastContext } from '../../context/ToastContext';
+import type { Toast as ToastType, ToastVariant } from '../../context/ToastContext';
 
 const variantStyles: Record<ToastVariant, { bg: string; icon: React.ReactNode }> = {
   success: {
