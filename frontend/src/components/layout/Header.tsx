@@ -102,14 +102,14 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
                 <>
                   <Link
                     to="/admin/login"
-                    className="hidden md:inline-flex text-sm font-medium text-text-muted hover:text-primary-600 transition-colors duration-micro"
+                    className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-full shadow-sm hover:shadow-md transition-all duration-200"
                   >
                     Admin Login
                   </Link>
                   {/* Mobile menu button */}
                   <button
                     onClick={() => setIsMobileMenuOpen(true)}
-                    className="md:hidden p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-gray-100 transition-colors duration-micro"
+                    className="md:hidden p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200"
                     aria-label="Open menu"
                   >
                     <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -121,7 +121,7 @@ export const Header: React.FC<HeaderProps> = ({ isAdmin = false }) => {
                 <div className="flex items-center gap-4">
                   <Link
                     to="/admin/dashboard"
-                    className="text-sm font-medium text-text-secondary hover:text-primary-600 transition-colors duration-micro"
+                    className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200"
                   >
                     Dashboard
                   </Link>
