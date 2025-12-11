@@ -24,10 +24,12 @@ class Recording(BaseModel):
         data.update({
             'session_id': self.session_id,
             'youtube_url': self.youtube_url,
+            'video_url': self.youtube_url,  # Alias for frontend compatibility
             'thumbnail_url': self.thumbnail_url,
             'pdf_url': self.pdf_url,
             'recorded_date': self.recorded_date.isoformat() if self.recorded_date else None,
             'views_count': self.views_count,
+            'views': self.views_count,  # Alias for frontend compatibility
         })
         return data
 

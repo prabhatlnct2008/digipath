@@ -113,7 +113,7 @@ export function SessionDetailPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
-            {session.meeting_link && (
+            {session.meeting_link && session.status === 'published' && (
               <a
                 href={session.meeting_link}
                 target="_blank"

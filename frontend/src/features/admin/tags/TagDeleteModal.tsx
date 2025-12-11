@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTagUsage, useDeleteTag, useUpdateTag } from '../../../hooks/useTags';
+import { useTagUsage, useDeleteTag, useUpdateTag, useTags } from '../../../hooks/useTags';
 import { Modal } from '../../../components/ui/Modal';
 import { Button } from '../../../components/ui/Button';
 import { Skeleton } from '../../../components/ui/Skeleton';
@@ -12,21 +12,30 @@ interface TagDeleteModalProps {
 
 export const TagDeleteModal: React.FC<TagDeleteModalProps> = ({ tag, onClose }) => {
   const [error, setError] = useState('');
+  const [replaceWithId, setReplaceWithId] = useState<string>('');
   const { data: usage, isLoading: usageLoading } = useTagUsage(tag.id);
+  const { data: allTags } = useTags();
   const deleteTag = useDeleteTag();
   const updateTag = useUpdateTag();
 
-  const usageCount = usage?.count || 0;
+  const usageCount = usage?.usage_count || usage?.count || 0;
   const isInUse = usageCount > 0;
 
+  // Get replacement options (same category, active, not the current tag)
+  const replacementOptions = allTags
+    ? (allTags[tag.category] || []).filter(
+        (t: Tag) => t.id !== tag.id && t.is_active
+      )
+    : [];
+
   const handleDelete = async () => {
-    if (isInUse) {
-      setError('Cannot delete a tag that is in use');
+    if (isInUse && !replaceWithId) {
+      setError('Please select a replacement tag or deactivate instead');
       return;
     }
 
     try {
-      await deleteTag.mutateAsync(tag.id);
+      await deleteTag.mutateAsync({ id: tag.id, replaceWith: replaceWithId || undefined });
       onClose();
     } catch (err) {
       setError('Failed to delete tag. Please try again.');
@@ -69,12 +78,35 @@ export const TagDeleteModal: React.FC<TagDeleteModalProps> = ({ tag, onClose }) 
             {isInUse && (
               <div className="p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-yellow-800 font-medium mb-2">
-                  Cannot delete tag in use
+                  Tag is in use
                 </p>
-                <p className="text-sm text-yellow-800">
-                  This tag is currently being used and cannot be deleted. You can deactivate it
-                  instead to prevent it from being used in new sessions.
+                <p className="text-sm text-yellow-800 mb-3">
+                  To delete this tag, either select a replacement tag to reassign all sessions,
+                  or deactivate it to prevent it from being used in new sessions.
                 </p>
+
+                {replacementOptions.length > 0 && (
+                  <div className="mt-3">
+                    <label className="block text-sm font-medium text-yellow-800 mb-1">
+                      Replace with:
+                    </label>
+                    <select
+                      value={replaceWithId}
+                      onChange={(e) => {
+                        setReplaceWithId(e.target.value);
+                        setError('');
+                      }}
+                      className="w-full px-3 py-2 border border-yellow-300 rounded-lg bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                    >
+                      <option value="">Select a replacement tag...</option>
+                      {replacementOptions.map((t: Tag) => (
+                        <option key={t.id} value={t.id}>
+                          {t.label || t.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </div>
             )}
           </>
@@ -94,7 +126,7 @@ export const TagDeleteModal: React.FC<TagDeleteModalProps> = ({ tag, onClose }) 
           >
             Cancel
           </Button>
-          {isInUse ? (
+          {isInUse && (
             <Button
               variant="secondary"
               onClick={handleDeactivate}
@@ -102,16 +134,19 @@ export const TagDeleteModal: React.FC<TagDeleteModalProps> = ({ tag, onClose }) 
             >
               {updateTag.isPending ? 'Deactivating...' : 'Deactivate Instead'}
             </Button>
-          ) : (
-            <Button
-              variant="secondary"
-              onClick={handleDelete}
-              disabled={deleteTag.isPending || usageLoading}
-              className="bg-red-600 hover:bg-red-700 text-white"
-            >
-              {deleteTag.isPending ? 'Deleting...' : 'Delete Tag'}
-            </Button>
           )}
+          <Button
+            variant="secondary"
+            onClick={handleDelete}
+            disabled={deleteTag.isPending || usageLoading || (isInUse && !replaceWithId)}
+            className="bg-red-600 hover:bg-red-700 text-white disabled:bg-red-300"
+          >
+            {deleteTag.isPending
+              ? 'Deleting...'
+              : isInUse && replaceWithId
+              ? 'Replace & Delete'
+              : 'Delete Tag'}
+          </Button>
         </div>
       </div>
     </Modal>
